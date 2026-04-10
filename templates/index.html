@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>家計簿</title>
+</head>
+<body>
+    <h1>家計簿</h1>
+    <h2>合計: {{ total }} 円</h2>
+
+    <a href="/add">追加</a>
+
+    <table border="1">
+        <tr>
+            <th>ID</th><th>日付</th><th>金額</th><th>カテゴリ</th><th>種別</th><th>メモ</th>
+        </tr>
+        {% for r in records %}
+        <tr>
+            <td>{{ r[0] }}</td>
+            <td>{{ r[1] }}</td>
+            <td>{{ r[2] }}</td>
+            <td>{{ r[3] }}</td>
+            <td>{{ r[4] }}</td>
+            <td>{{ r[5] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>追加</title>
+</head>
+<body>
+    <h1>データ追加</h1>
+
+    <form method="POST">
+        日付: <input type="date" name="date"><br>
+        金額: <input type="number" name="amount"><br>
+        カテゴリ: <input type="text" name="category"><br>
+
+        種別:
+        <select name="type">
+            <option value="収入">収入</option>
+            <option value="支出">支出</option>
+        </select><br>
+
+        メモ: <input type="text" name="memo"><br>
+
+        <button type="submit">追加</button>
+    </form>
+
+    <a href="/">戻る</a>
+</body>
+</html>
