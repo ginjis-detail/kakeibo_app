@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>データの編集</title>
+</head>
+<body>
+    <h1>データを編集</h1>
+
+    <form action="/edit/{{ record[0] }}" method="POST">
+        日付: <input type="date" name="date" value="{{ record[1] }}" required><br>
+        金額: <input type="number" name="amount" value="{{ record[2] }}" required><br>
+        カテゴリ: <input type="text" name="category" value="{{ record[3] }}"><br>
+
+        種別:
+        <select name="type">
+            <option value="収入" {% if record[4] == '収入' %}selected{% endif %}>収入</option>
+            <option value="支出" {% if record[4] == '支出' %}selected{% endif %}>支出</option>
+        </select><br>
+
+        メモ: <input type="text" name="memo" value="{{ record[5] }}"><br>
+
+        <button type="submit">更新を保存</button>
+    </form>
+
+    <br>
+    <a href="/">キャンセルして戻る</a>
+</body>
+</html>

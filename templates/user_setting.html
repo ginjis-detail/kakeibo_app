@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>家族設定</title>
+</head>
+<body>
+    <h1>家族を登録</h1>
+    
+    <form method="POST">
+        名前: <input type="text" name="new_user" placeholder="例：お父さん" required>
+        <button type="submit">登録</button>
+    </form>
+
+    <h2>登録済みメンバー</h2>
+    <ul>
+        {% for u in users %}
+        <li>{{ u[0] }}</li>
+        {% endfor %}
+    </ul>
+
+    <br>
+    <a href="/">家計簿に戻る</a>
+</body>
+</html>

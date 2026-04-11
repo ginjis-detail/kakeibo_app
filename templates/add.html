@@ -7,14 +7,22 @@
     <h1>データ追加</h1>
 
     <form method="POST">
-        日付: <input type="date" name="date"><br>
-        金額: <input type="number" name="amount"><br>
+        作成者:
+        <select name="user_name" required>
+            {% for u in users %}
+            <option value="{{ u[0] }}">{{ u[0] }}</option>
+            {% endfor %}
+        </select>
+        <br>
+
+        日付: <input type="date" name="date" required><br>
+        金額: <input type="number" name="amount" required><br>
         カテゴリ: <input type="text" name="category"><br>
 
         種別:
         <select name="type">
             <option value="収入">収入</option>
-            <option value="支出">支出</option>
+            <option value="支出" selected>支出</option>
         </select><br>
 
         メモ: <input type="text" name="memo"><br>
@@ -22,6 +30,7 @@
         <button type="submit">追加</button>
     </form>
 
+    <br>
     <a href="/">戻る</a>
 </body>
 </html>

@@ -1,28 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
+    <meta charset="UTF-8">
     <title>家計簿</title>
 </head>
 <body>
-    <h1>家計簿</h1>
-    <h2>合計: {{ total }} 円</h2>
+    <h1>家計簿アプリ</h1>
 
-    <a href="/add">追加</a>
+    <div>
+        <strong>表示切替:</strong> 
+        <a href="/">全員</a>
+        {% for u in users %}
+        | <a href="/?user={{ u[0] }}">{{ u[0] }}さん</a>
+        {% endfor %}
+        | <a href="/user_setting" style="font-weight:bold; color:blue;">＋家族を登録</a>
+    </div>
 
-    <table border="1">
+    <hr>
+
+    <h2>
+        {% if current_user %}
+            {{ current_user }}さんの合計:
+        {% else %}
+            全員の合計:
+        {% endif %}
+        {{ total }} 円
+    </h2>
+
+    <a href="/add" style="font-size: 1.2em;"> 新規データを追加</a>
+    <br><br>
+
+    <table border="1" cellpadding="5" style="border-collapse: collapse; width: 100%;">
         <tr>
-            <th>ID</th><th>日付</th><th>金額</th><th>カテゴリ</th><th>種別</th><th>メモ</th>
+            <th>ID</th>
+            <th>日付</th>
+            <th>作成者</th> <th>金額</th>
+            <th>カテゴリ</th>
+            <th>種別</th>
+            <th>メモ</th>
+            <th>操作</th>
         </tr>
         {% for r in records %}
         <tr>
             <td>{{ r[0] }}</td>
             <td>{{ r[1] }}</td>
-            <td>{{ r[2] }}</td>
+            <td>{{ r[6] }}</td> <td>{{ r[2] }}円</td>
             <td>{{ r[3] }}</td>
             <td>{{ r[4] }}</td>
             <td>{{ r[5] }}</td>
+            <td>
+                <a href="/edit/{{ r[0] }}">編集</a> | 
+                <a href="/delete/{{ r[0] }}" onclick="return confirm('本当に消してもいいですか？')" style="color:red;">削除</a>
+            </td>
         </tr>
         {% endfor %}
     </table>
+
 </body>
 </html>
