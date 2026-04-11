@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>カテゴリ設定</title>
+</head>
+<body>
+    <h1>カテゴリの管理</h1>
+
+    <form method="POST">
+        新しいカテゴリ名: 
+        <input type="text" name="new_category" required placeholder="例：食費、交際費">
+        <button type="submit">追加</button>
+    </form>
+
+    <hr>
+
+    <h3>現在のカテゴリ一覧</h3>
+    <ul>
+        {% for cat in categories %}
+        <li>
+            {{ cat[1] }} <a href="/delete_category/{{ cat[1] }}"  
+               onclick="return confirm('このカテゴリを削除しますか？')">[削除]</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <br>
+    <a href="/add">入力画面に戻る</a> | <a href="/">トップに戻る</a>
+</body>
+</html>

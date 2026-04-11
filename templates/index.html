@@ -11,7 +11,7 @@
         <strong>表示切替:</strong> 
         <a href="/">全員</a>
         {% for u in users %}
-        | <a href="/?user={{ u[0] }}">{{ u[0] }}さん</a>
+        |  <a href="/?user={{ u[0] }}">{{ u[0] }}さん</a>
         <a href="/delete_user/{{ u[0] }}" onclick="return confirm('本当に消してもいいですか？')">x</a>
         {% endfor %}
         | <a href="/user_setting" style="font-weight:bold; color:blue;">＋アカウントを登録</a>
@@ -35,7 +35,17 @@
         <tr>
             <th>日付</th>
             <th>作成者</th> <th>金額</th>
-            <th>カテゴリ</th>
+            <th>
+                カテゴリ
+            <select name="category" onchange="location.href=`/?cat=${this.value}{% if current_user %}&user={{ current_user }}{% endif %}`">
+                <option value="">すべて</option>
+                {% for cat in categories %}
+                    <option value="{{ cat[1] }}" {% if cat[1] == current_cat %}selected{% endif %}>
+                        {{ cat[1] }}
+                    </option>
+                {% endfor %}
+            </select>
+            </th>
             <th>種別</th>
             <th>メモ</th>
             <th>操作</th>

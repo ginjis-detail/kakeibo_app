@@ -17,8 +17,16 @@
 
         日付: <input type="date" name="date" required><br>
         金額: <input type="number" name="amount" required><br>
-        カテゴリ: <input type="text" name="category"><br>
 
+        カテゴリ: 
+        <select name="category" required>
+            <option value="">カテゴリを選択</option>
+            {% for cat in categories %}
+                <option value="{{ cat[1] }}">{{ cat[1] }}</option>
+            {% endfor %}
+        </select>
+        <a href="/category_setting">追加</a>
+        <br>
         種別:
         <select name="type">
             <option value="収入">収入</option>
