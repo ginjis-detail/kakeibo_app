@@ -1,34 +1,12 @@
-from flask import Flask, render_template, request, redirect
-import sqlite3
-
-app = Flask(__name__)
-
-# DB初期化（起動時にテーブルがなければ作る）
-def init_db():
-    conn = sqlite3.connect("kakeibo.db")
-    cur = conn.cursor()
-    cur.execute("CREATE TABLE IF NOT EXISTS users (name TEXT PRIMARY KEY)")
-
-    cur.execute("""
-    CREATE TABLE IF NOT EXISTS records (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        date TEXT,
-        amount INTEGER,
-        category TEXT,
-        type TEXT,
-        memo TEXT,
-        user_name TEXT
-    )
-    """)
-    conn.commit()
-    conn.close()
+from flask import render_template, request, redirect
+from database import get_db
+import app
 
 # 一覧表示
 @app.route("/")
 def index():
     target_user = request.args.get("user")
-    
-    conn = sqlite3.connect("kakeibo.db")
+    conn = get_db()
     cur = conn.cursor()
     
     cur.execute("SELECT * FROM users")
@@ -52,7 +30,7 @@ def index():
 # データ追加
 @app.route("/add", methods=["GET", "POST"])
 def add():
-    conn = sqlite3.connect("kakeibo.db")
+    conn = get_db()
     cur = conn.cursor()
 
     if request.method == "POST":
@@ -79,7 +57,7 @@ def add():
 # 追加家族登録ページ
 @app.route("/user_setting", methods=["GET", "POST"])
 def user_setting():
-    conn = sqlite3.connect("kakeibo.db")
+    conn = get_db
     cur = conn.cursor()
     
     if request.method == "POST":
@@ -96,7 +74,7 @@ def user_setting():
 # データ削除
 @app.route("/delete/<int:id>")
 def delete(id):
-    conn = sqlite3.connect("kakeibo.db")
+    conn = get_db()
     cur = conn.cursor()
     cur.execute("DELETE FROM records WHERE id = ?", (id,))
     conn.commit()
@@ -106,7 +84,7 @@ def delete(id):
 # データ編集
 @app.route("/edit/<int:id>", methods=["GET", "POST"])
 def edit(id):
-    conn = sqlite3.connect("kakeibo.db")
+    conn = get_db()
     cur = conn.cursor()
 
     if request.method == "POST":
@@ -129,9 +107,3 @@ def edit(id):
     record = cur.fetchone()
     conn.close()
     return render_template("edit.html", record=record)
-
-if __name__ == "__main__":
-    init_db()
-    app.run(debug=True)
-
-#python app.py
