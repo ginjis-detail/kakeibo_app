@@ -12,8 +12,9 @@
         <a href="/">全員</a>
         {% for u in users %}
         | <a href="/?user={{ u[0] }}">{{ u[0] }}さん</a>
+        <a href="/delete_user/{{ u[0] }}" onclick="return confirm('本当に消してもいいですか？')">x</a>
         {% endfor %}
-        | <a href="/user_setting" style="font-weight:bold; color:blue;">＋家族を登録</a>
+        | <a href="/user_setting" style="font-weight:bold; color:blue;">＋アカウントを登録</a>
     </div>
 
     <hr>
@@ -32,7 +33,6 @@
 
     <table border="1" cellpadding="5" style="border-collapse: collapse; width: 100%;">
         <tr>
-            <th>ID</th>
             <th>日付</th>
             <th>作成者</th> <th>金額</th>
             <th>カテゴリ</th>
@@ -42,7 +42,6 @@
         </tr>
         {% for r in records %}
         <tr>
-            <td>{{ r[0] }}</td>
             <td>{{ r[1] }}</td>
             <td>{{ r[6] }}</td> <td>{{ r[2] }}円</td>
             <td>{{ r[3] }}</td>
@@ -50,7 +49,7 @@
             <td>{{ r[5] }}</td>
             <td>
                 <a href="/edit/{{ r[0] }}">編集</a> | 
-                <a href="/delete/{{ r[0] }}" onclick="return confirm('本当に消してもいいですか？')" style="color:red;">削除</a>
+                <a href="/delete/{{ r[0] }}" onclick="return confirm('本当に消してもいいですか？')">削除</a>
             </td>
         </tr>
         {% endfor %}

@@ -101,3 +101,14 @@ def register_routes(app):#一覧表示
         record = cur.fetchone()
         conn.close()
         return render_template("edit.html", record=record)
+    
+    @app.route("/delete_user/<string:name>") # アカウント削除
+    def delete_user(name):
+        conn = get_db()
+        cur = conn.cursor()
+        #ユーザー削除
+        cur.execute("DELETE FROM records WHERE user_name = ?", (name,))
+        cur.execute("DELETE FROM users WHERE name = ?", (name,))
+        conn.commit()
+        conn.close()
+        return redirect("/")
