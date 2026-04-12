@@ -88,11 +88,15 @@ def register_routes(app):#一覧表示
             conn.commit()
             conn.close()
             return redirect("/")
-
+        
         cur.execute("SELECT * FROM records WHERE id = ?", (id,))
         record = cur.fetchone()
+
+        cur.execute("SELECT * FROM categories")
+        categories = cur.fetchall()
+
         conn.close()
-        return render_template("edit.html", record=record)
+        return render_template("edit.html", record=record, categories=categories)
     
     @app.route("/delete_user/<string:name>") # アカウント削除
     def delete_user(name):
