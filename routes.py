@@ -34,7 +34,7 @@ def register_routes(app):#一覧表示
         
         conn.close()
 
-        total = sum(r[2] if r[4] == "収入" else -r[2] for r in records)
+        total = sum(int(r[2]) if r[4] == "収入" else -int(r[2]) for r in records)
 
         return render_template("index.html", 
                                records=records, 
@@ -143,6 +143,10 @@ def register_routes(app):#一覧表示
 
         cur.execute("SELECT * FROM users")
         users = cur.fetchall()
+        if not users:
+            conn.close()
+            # 直接リダイレクト
+            return redirect("/user_setting")
         cur.execute("SELECT * FROM categories")
         categories = cur.fetchall()
         conn.close()

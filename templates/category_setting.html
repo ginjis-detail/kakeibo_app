@@ -19,7 +19,7 @@
         {% for cat in categories %}
         <li>
             {{ cat[1] }} <a href="/delete_category/{{ cat[1] }}"  
-               onclick="return confirm('このカテゴリを削除しますか？')">[削除]</a>
+               onclick="return confirm('このカテゴリを削除しますか？')">削除</a>
         </li>
         {% endfor %}
     </ul>

@@ -8,12 +8,13 @@
 
     <form method="POST">
         作成者:
-        <select name="user_name" required>
-            {% for u in users %}
-            <option value="{{ u[0] }}">{{ u[0] }}</option>
-            {% endfor %}
+        <select name="user_name" id="user_name" required>
+            <option value="" disabled selected>家族を選択</option>
+                {% for u in users %}
+                    <option value="{{ u[0] }}">{{ u[0] }}</option>
+                {% endfor %}
         </select>
-        <br>
+    </br>
 
         日付: <input type="date" name="date" required><br>
         金額: <input type="number" name="amount" required><br>

@@ -9,7 +9,14 @@
     <form action="/edit/{{ record[0] }}" method="POST">
         日付: <input type="date" name="date" value="{{ record[1] }}" required><br>
         金額: <input type="number" name="amount" value="{{ record[2] }}" required><br>
-        カテゴリ: <input type="text" name="category" value="{{ record[3] }}"><br>
+        カテゴリ: 
+        <select name="category" required>
+            <option value="">カテゴリを選択</option>
+            {% for cat in categories %}
+                <option value="{{ cat[1] }}">{{ cat[1] }}</option>
+            {% endfor %}
+        </select>
+    </br>
 
         種別:
         <select name="type">
